@@ -1,0 +1,135 @@
+﻿#  class list
+1. [Admob](#public-class-admob)
+2. [AdmobEvent](#public-class-admobevent)
+3. [AdSize](#public-class-adsize)
+4. [AdPosition](#public-class-adposition)
+
+## public class Admob 
+the main class of Admob Unity Plugin,never new Admob ,just call Admob.Instance() to get admob intance.
+
+
+* `public delegate void AdmobEventHandler(string eventName, string msg);`  
+[admob event](#public-class-admobevent) delegate define
+
+* ` public event AdmobEventHandler bannerEventHandler;`  
+delegate to handler admob banner [event](#public-class-admobevent),
+ 
+* `public event AdmobEventHandler interstitialEventHandler;`  
+delegate to handler admob interstitial [event](#public-class-admobevent)
+ 
+* `public event AdmobEventHandler rewardedVideoEventHandler;`  
+delegate to handler admob video [event](#public-class-admobevent)
+
+* `public event AdmobEventHandler nativeBannerEventHandler;`  
+delegate to handler admob native express banner [event](#public-class-admobevent)
+
+* `public static Admob Instance()`  
+Method to get Admob unique instance
+
+* `public void initAdmob(string bannerID, string InterstitialID)`  
+init admob,banner ID and InterstitialID is format ca-app-pub-27960468906xxx/xxxx67388 got from www.admob.com
+ 
+* `public void showBannerAbsolute(AdSize size, int x, int y)`  
+show admob at absolute position,size can been any const of [AdSize](#public-class-adsize) such as AdSize.Banner
+ 
+* `public void showBannerRelative(AdSize size, int position, int marginY)`  
+show admob at relative position,position can been any const of [AdPosition](#public-class-adposition), size can been any const of [AdSize](#public-class-adsize) such as AdSize.Banner
+ 
+* `public void removeBanner()`  
+remove and hide admob banner ad        
+ 
+* `public void showNativeBannerAbsolute(AdSize size, int x, int y,string admobID,string bannerName)`  
+show admob native banner at absolute position,size can been any  [AdSize](#public-class-adsize) value defined in apps.admob.com,
+if you want to show more than one banner ,you can set bannerName value.
+ 
+* `public void showNativeBannerRelative(AdSize size, int position, int marginY,string admobID,string bannerName)`  
+show admob at relative position,position can been any const of [AdPosition](#public-class-adposition), size can been any [AdSize](#public-class-adsize) value defined in apps.admob.com,such as new AdSize(360,100);
+if you want to show more than one banner ,you can set bannerName value.
+ 
+* `public void removeNativeBanner(string bannerName)`  
+remove and hide admob native banner ad,if you setted bannerName value when call show method ,you need set bannerName to remove It
+
+
+* `public void loadInterstitial()`  
+load admob Interstitial,this will send a ad load request,interstitialEventHandler will been called when load success or fail.  
+Interstitial will not show auto after load success,So you need to call showInterstitial  at  right time
+ 
+* `public bool isInterstitialReady()`  
+Detecting whether the ad has finished loading,if Interstitial is loaded success will get true
+ 
+* `public void showInterstitial()`  
+show Interstitial,call this after Interstitial loaded success only
+ 
+* `public void setTesting(bool v)`  
+Set Test Mode,default false,you must set false or not call this method when publish your app to app store
+ 
+* `public void setForChildren(bool v)`  
+Set Application  for children,default false
+
+***
+
+## public class AdmobEvent
+ Admob Event Type 
+   
+* `public static readonly string onAdLoaded = "onAdLoaded";`  
+Admob Ad loaded success
+	
+* `public static readonly string onAdFailedToLoad = "onAdFailedToLoad";`  
+Admob Ad load fail
+	
+* `public static readonly string onAdOpened = "onAdOpened";`  
+Admob Ad is show and opened
+	
+* `public static readonly string adViewWillDismissScreen = "adViewWillDismissScreen";`  
+Admob Ad will close and dismiss screen
+	
+* `public static readonly string onAdClosed = "onAdClosed";`  
+Admob Ad is closed
+	
+* `public static readonly string onAdLeftApplication = "onAdLeftApplication";`  
+Admob Ad is touched and will left application
+	
+***
+
+## public class AdPosition
+Admob Banner Ad Relative Position const 
+* `public static readonly int TOP_LEFT = 1;`  
+* `public static readonly int TOP_CENTER = 2;`  
+* `public static readonly int TOP_RIGHT = 3;`  
+* `public static readonly int MIDDLE_LEFT = 4;`  
+* `public static readonly int MIDDLE_CENTER = 5;`  
+* `public static readonly int MIDDLE_RIGHT = 6;`  
+* `public static readonly int BOTTOM_LEFT = 7;`  
+* `public static readonly int BOTTOM_CENTER = 8;`  
+* `public static readonly int BOTTOM_RIGHT = 9;`  
+
+*** 	
+## public class AdSize
+Admob Banner Ad Size define
+	
+* `public static readonly AdSize Banner = new AdSize(320, 50);`  
+banner of size 320x50
+	
+* `public static readonly AdSize MediumRectangle = new AdSize(300, 250);`  
+banner of size 300x250
+	
+* `public static readonly AdSize IABBanner = new AdSize(468, 60);`  
+banner of size 468x60
+	
+* `public static readonly AdSize Leaderboard = new AdSize(728, 90);`  
+banner of size 728x90
+	
+* `public static readonly AdSize WideSkyscraper = new AdSize(120,600);`  
+banner of size 120x600
+	
+* `public static readonly AdSize SmartBanner = new AdSize(-1,-2);`  
+smart banner
+
+* `public AdSize(int width, int height)`  
+define a ad size type
+	
+* `public int Width`  
+return ad size width value
+	
+* `public int Height`  
+return ad size height value
